@@ -1,6 +1,7 @@
+
 import 'package:postgres/postgres.dart';
 
-// research how to create an instance of database.
+// research how to create an instance of database?
 
 class Db {
   late final PostgreSQLConnection connection;
