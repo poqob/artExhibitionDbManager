@@ -1,5 +1,4 @@
-import 'package:database_model/models/model_museum.dart';
-import 'package:database_model/api/museum_api.dart';
+import 'package:database_model/api/db.dart';
 
 Future<void> main(List<String> arguments) async {
   //db instances
