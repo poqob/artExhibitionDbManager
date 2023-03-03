@@ -53,5 +53,5 @@ class Authentication {
 extension ExceptionAuth on Authentication {
   String? get getUsername => _authState == true ? _username : null;
   String? get getPassword => _authState == true ? _password : null;
-  bool? get authState => _authState;
+  bool? get getAuthState => _authState;
 }
