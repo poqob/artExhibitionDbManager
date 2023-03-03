@@ -1,4 +1,4 @@
-enum Que {
+enum Que with mi {
   allPaints,
   allStatues,
   allDecorative,
@@ -8,9 +8,13 @@ enum Que {
 }
 
 extension ExtensionQueries on Que {
-  static const String artQueryRoot =
-      "select art_id,art_name,art_artist_id,art_material_id,art_movement_id,art_about_id,artist_name,material_name,movement_name,about_text,about_img from";
-  String get getQue {
+  String get getQue => _fun(name);
+}
+
+mixin mi {
+  String _fun(String name) {
+    const String artQueryRoot =
+        "select art_id,art_name,art_artist_id,art_material_id,art_movement_id,art_about_id,artist_name,material_name,movement_name,about_text,about_img from";
     switch (name) {
       case "allArtists":
         return "select * from artists.allArtists();";
