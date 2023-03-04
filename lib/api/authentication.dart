@@ -14,24 +14,22 @@ class Authentication {
   //methods
   Future<bool> logIn(String username, String password) async {
     dynamic res;
-    await Db()
-        .query("select users.auth('$username','$password');")
-        .then((value) {
-      res = value[0][0];
+    await Db().query("select users.auth('$username','$password');").then(
+      (value) {
+        res = value[0][0];
 
-      //type check
-      res.runtimeType != bool
-          ? throw Exception(
-              "database query result's runtime type is not boolean. runtimetype: ${res.runtimeType}")
-          : res;
-
-      //true situation
-      if (res) {
-        _username = username;
-        _password = password;
-        _authState = true;
-      }
-    });
+        try {
+          if (res == true) {
+            _username = username;
+            _password = password;
+            _authState = true;
+          }
+        } catch (e) {
+          throw Exception(
+              "database query result's runtime type is not boolean. runtimetype: ${res.runtimeType}");
+        }
+      },
+    );
     return res;
   }
 
@@ -41,11 +39,12 @@ class Authentication {
     await Db()
         .query(
             "select users.signUpFromForm('$username','$password','$countryId','$cityId');")
-        .then((value) {
-      _username = username;
-      _password = password;
-      _authState = true;
-    });
+        .then(
+      (value) {
+        _username = username;
+        _password = password;
+      },
+    );
   }
 }
 
