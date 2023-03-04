@@ -45,14 +45,27 @@ Future<void> main(List<String> arguments) async {
   }
   await cubitArt.close();
 
-  //********************************AuthenticationCubit******************************************* */
+  //********************************AuthenticationCubitSignUp****************************************** */
 
+  final cubitAuth = AuthenticationCubit();
+  print(cubitAuth.state);
+  await cubitAuth.signUp(
+      username: "poqobi", password: "poqobi", countryId: 1, cityId: 1);
+  print(cubitAuth.state);
+  print(Authentication.instance.getAuthState);
+  print(Authentication.instance.getUsername);
+  print(Authentication.instance.getPassword);
+  cubitAuth.close();
+
+  //********************************AuthenticationCubitLogIn******************************************* */
+  /*
   final cubitAuth = AuthenticationCubit();
   print(cubitAuth.state);
   await cubitAuth.auth(username: "pattis12", password: "abc1234");
   print(cubitAuth.state);
   print(Authentication.instance.getAuthState);
   cubitAuth.close();
+  */
 
   await Db().connKill(); //kill the db connection.
 }
