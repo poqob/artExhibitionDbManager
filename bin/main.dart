@@ -1,14 +1,16 @@
+import 'package:database_model/api/authentication.dart';
 import 'package:database_model/api/db.dart';
 import 'package:database_model/api/queries.dart';
 import 'package:database_model/bloc/art/bloc_art.dart';
 import 'package:database_model/bloc/art/states_art.dart';
 import 'package:database_model/bloc/artists/bloc_artist.dart';
 import 'package:database_model/bloc/artists/states_artist.dart';
+import 'package:database_model/bloc/authentication/bloc_authentication.dart';
 import 'package:database_model/bloc/museum/bloc_museum.dart';
 import 'package:database_model/bloc/museum/states_museum.dart';
 
 Future<void> main(List<String> arguments) async {
-  await Db().conn();
+  await Db().conn(); //start db connection
   final cubitMuseum = MuseumCubits();
   print(cubitMuseum.state.toString());
   await cubitMuseum.getMuseums();
@@ -17,7 +19,7 @@ Future<void> main(List<String> arguments) async {
   for (var element in content.museums) {
     print(element.museumName);
   }
-//********************************************************************************************* */
+//*************************************ArtistCubit********************************************** */
   await cubitMuseum.close();
 
   final cubitArtist = ArtistCubit();
@@ -31,7 +33,7 @@ Future<void> main(List<String> arguments) async {
   }
   await cubitArtist.close();
 
-  //******************************************************************************************** */
+  //***********************************ArtCubit************************************************ */
 
   final cubitArt = ArtCubit();
   print(cubitArt.state);
@@ -43,5 +45,14 @@ Future<void> main(List<String> arguments) async {
   }
   await cubitArt.close();
 
-  await Db().connKill();
+  //********************************AuthenticationCubit******************************************* */
+
+  final cubitAuth = AuthenticationCubit();
+  print(cubitAuth.state);
+  await cubitAuth.auth(username: "pattis12", password: "abc1234");
+  print(cubitAuth.state);
+  print(Authentication.instance.getAuthState);
+  cubitAuth.close();
+
+  await Db().connKill(); //kill the db connection.
 }
