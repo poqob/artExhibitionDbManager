@@ -1,7 +1,4 @@
-//states are written here.
-
 import 'package:database_model/models/museum/model_museum.dart';
-//import 'package:flutter/foundation.dart';
 
 abstract class MuseumStates {
   const MuseumStates();
@@ -18,15 +15,6 @@ class MuseumLoading extends MuseumStates {
 class MuseumLoaded extends MuseumStates {
   final List<Museum> museums;
   const MuseumLoaded(this.museums);
-
-  @override
-  bool operator ==(Object other) {
-    if (other is MuseumLoaded) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 }
 
 class MuseumsError extends MuseumStates {
