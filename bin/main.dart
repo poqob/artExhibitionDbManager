@@ -9,8 +9,15 @@ import 'package:database_model/bloc/authentication/bloc_authentication.dart';
 import 'package:database_model/bloc/museum/bloc_museum.dart';
 import 'package:database_model/bloc/museum/states_museum.dart';
 
+// you can log in, sign up and also make requests for all type of arts, artists, museums with state management via this mini project.
+// technologies: dart-postgresql,
+// state management: bloc architecture.
+
+//example usages.
 Future<void> main(List<String> arguments) async {
   await Db().conn(); //start db connection
+
+  //*************************************MuseumCubit******************************************** */
   final cubitMuseum = MuseumCubits();
   print(cubitMuseum.state.toString());
   await cubitMuseum.getMuseums();
